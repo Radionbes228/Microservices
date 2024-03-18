@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование товара [[${product.title}]] &dash; СельМаг</title>
+</head>
+<body>
+<h1>Редактирование товара [[${product.title}]]</h1>
+<div data-th-if="${errors}">
+    <h2>Допущены ошибки</h2>
+    <ul>
+        <li data-th-each="errors: ${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
+<a data-th-href="@{/catalog/products/{productId}(productId=${product.id})}">&larr; К товару</a>
+<form method="post" data-th-action="@{/catalog/products/{productId}/edit(productId=${product.id})}">
+  <label for="title">Название: </label>
+    <input id="title" type="text" name="title" data-th-value="${payload != null ? payload.title() : product.title}"><br>
+  <label for="details">Описание: </label>
+    <textarea id="details" name="details" data-th-text="${payload != null ? payload.details() : product.details}"></textarea><br>
+  <input type="submit" value="Редактировать">
+</form>
+</body>
+</html>
